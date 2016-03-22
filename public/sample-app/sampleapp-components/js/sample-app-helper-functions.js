@@ -93,7 +93,14 @@ $(document).ready(function () {
     });
 
     $('#messages').live('contentchanged', function(){
-        scrollToBottom('messages');
+        /* 
+           FIXME This is triggered before the DOM is actually updated. Hack
+           around it by delaying for 100ms. This is of course not reliable but
+           will be good enough for demos.
+        */
+        setTimeout(function () {
+            scrollToBottom('messages');
+        }, 100);
 
     });
 
